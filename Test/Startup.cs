@@ -18,6 +18,10 @@ namespace Test
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
+
             services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IContextAcessor, ContextAcessor>();
@@ -31,7 +35,7 @@ namespace Test
         {
 
             app.UseSwagger();
-            app.UseSwagger(options =>
+            app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", $"Minha API v1 " + Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT"));
             });
